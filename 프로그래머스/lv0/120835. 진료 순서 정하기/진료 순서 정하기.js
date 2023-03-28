@@ -1,12 +1,14 @@
 function solution(emergency) {
     const rank = new Array(emergency.length).fill(1)
     
-    emergency.forEach((ele,idx)=>{
-        emergency.forEach(compare=>{
-            if (ele===compare);
-            else if(ele<compare) rank[idx] ++
-        })
-    })
+     emergency.forEach((ele, idx) => {
+        for (let i = 0; i < idx; i++) {
+          const compare = emergency[i];
+          if (ele === compare) continue; // 동점인 경우 skip
+          if (ele < compare) rank[idx]++;
+          else rank[i]++;
+        }
+    });
     
     return rank;
 }
