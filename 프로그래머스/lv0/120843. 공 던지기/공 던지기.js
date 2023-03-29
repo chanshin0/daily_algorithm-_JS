@@ -6,5 +6,5 @@ function solution(numbers, k) {
         idx = (idx+2)%l
         cnt ++
     }
-    return idx+1;
+    return numbers[idx];
 }
