@@ -11,6 +11,7 @@ function solution(before, after) {
         if (afterObj[af]) afterObj[af] += 1
         else afterObj[af] = 1
     }
+    console.log(beforeObj.size)
     // [2]
     for (key in beforeObj){
         if (afterObj.hasOwnProperty(key) && beforeObj[key]===afterObj[key]) continue
