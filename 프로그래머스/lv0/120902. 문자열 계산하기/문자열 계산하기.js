@@ -1,24 +1,21 @@
 function solution(my_string) {
     let answer = 0;
+    const stringArr = my_string.split(' ');
     
-    my_string = my_string.split(' ')
-    
-    for (let i=0; i<my_string.length;){
-        if (my_string[i]==='+'){
-            answer += +my_string[i+1]
-            i += 2
-        } else if (my_string[i]==='-'){
-            answer -= +my_string[i+1]
-            i += 2
-        }
-        else{
-            answer = +my_string[i]
-            i ++
-        } 
+    if (!isNaN(stringArr[0])) {
+        answer = +stringArr[0];
     }
     
-    return answer
+    for (let i = 1; i < stringArr.length; i += 2) {
+        if (isNaN(stringArr[i+1])) {
+            continue;
+        }
+        if (stringArr[i] === '+') {
+            answer += +stringArr[i+1];
+        } else if (stringArr[i] === '-') {
+            answer -= +stringArr[i+1];
+        }
+    }
+    
+    return answer;
 }
-
-// 1. +나오면 뒷 숫자 더하기, i++해서 다음 반복문 스킵
-// 2. -나오면 뒷 숫자 빼고, i++해서 다음 반복문 스킵
