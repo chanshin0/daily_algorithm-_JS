@@ -7,16 +7,20 @@ function solution(board, moves) {
         for (let i=0; i<L; i++) {
             const item = board[i][move-1]
             if (item){
+                stack.push(item)
+                board[i][move-1] = 0
+                
                 const l = stack.length
-                if (stack[l-1]===item){
+                if (l>0 && stack[l-1]===stack[l-2]){
                     answer += 2
                     stack.pop()
-                } else {
-                    stack.push(item)
+                    stack.pop()
                 }
-                board[i][move-1] = 0
+                
                 break
             } 
+            
+         
         }
     })
     
