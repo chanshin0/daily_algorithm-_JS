@@ -3,19 +3,12 @@ function solution(n) {
     
     for (let i=1; i<=n; i++){
         answer ++
-        while(answer%3 ===0){
-            answer ++
-        }
         
-        
-        while (true){
+        while(true){
             let str = answer.toString().split('')
-            if (str.includes('3')){
+            if (answer%3===0) answer ++
+            else if (str.includes('3')){
                 answer ++
-                while(answer%3 ===0){
-                    answer ++
-                }
-                str = answer.toString().split('')
             }
             else break
         }
