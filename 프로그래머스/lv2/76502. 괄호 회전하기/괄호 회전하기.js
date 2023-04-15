@@ -18,6 +18,8 @@ const isValid = (s) => {
 function solution(s) {
     var answer = 0;
     
+    console.log(isValid("{{{[[[]]]}}}"))
+    
     for (let i=-1; i<s.length-1; i++){
         s = s.substring(1, s.length+1) + s.substring(0, 1)
         // console.log(s)
