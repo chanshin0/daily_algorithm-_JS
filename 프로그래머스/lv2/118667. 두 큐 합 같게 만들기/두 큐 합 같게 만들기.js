@@ -10,7 +10,7 @@ function solution(queue1, queue2) {
 
     let sum = sum1
     while (true) {
-        if (answer >= list.length*2) return -1;
+        if (answer >= queue1.length*3) return -1;
 
         if (sum===half) break;
         else if (sum < half) {
