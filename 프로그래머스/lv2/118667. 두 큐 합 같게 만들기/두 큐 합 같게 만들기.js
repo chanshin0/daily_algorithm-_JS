@@ -12,7 +12,7 @@ function solution(queue1, queue2) {
     while (true) {
         if (answer >= queue1.length*3) return -1;
 
-        if (sum===half) break;
+        if (sum===half) return answer;
         else if (sum < half) {
             right ++
             sum += list[right]
@@ -24,5 +24,4 @@ function solution(queue1, queue2) {
         answer ++
     }
 
-    return answer;
 }
