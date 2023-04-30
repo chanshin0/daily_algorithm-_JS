@@ -12,13 +12,6 @@ function permutation(arr, selectNum) {
   return result;
 }
 
-const check = (per)=>{
-    if (per<=10) return 0
-    else if (per<=20) return 1
-    else if (per<=30) return 2
-    else return 3
-}
-
 function solution(users, emoticons) {
     var answer = [0, 0];
     const discount = [10, 20, 30, 40]
