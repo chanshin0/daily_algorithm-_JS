@@ -35,6 +35,6 @@ function solution(stones, k) {
         }
     }
     
-    return answer
+    return right
 
 }
