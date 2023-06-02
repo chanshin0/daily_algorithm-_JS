@@ -1,38 +1,42 @@
-function bfs(s, l, adjL) {
-    const cost = Array(l).fill(-1)
+function bfs(s, e, l, adjM) {
+    if (s===e) return 0
+    if (adjM[s][e]) return 1
+    const cost = Array(l+1).fill(Infinity)
     cost[s] = 0
-
+    
     const que = [s]
     while(que.length > 0) {
-        const now = que.shift()
+        const now = que.pop()
+        if (now===e) break;
         
-        adjL[now].forEach(n=>{
-            if (cost[n]===-1) {
-                cost[n] = cost[now] + 1
-                que.push(n)
+        for (let i=1; i<l; i++) {
+            if (adjM[now][i] && cost[i] >= cost[now] + 1) {
+                cost[i] = cost[now] + 1
+                que.push(i)
             }
-        })
+        }
     }
+    
     // console.log(cost)
-    return cost
+    return cost[e]===Infinity? -1 : cost[e]
 }
 
 function solution(n, roads, sources, destination) {
     var answer = [];
     
-    const adjL = Array(n+1).fill(null).map(_=>[])
-    // console.log(adjL)
+    const adjM = Array(n+1).fill().map(()=>Array(n+1).fill(0))
+    // console.log(adjM)
     
     for (const road of roads) {
         const [s, e] = road
-        adjL[s].push(e)
-        adjL[e].push(s)
+        adjM[s][e] = 1
+        adjM[e][s] = 1
     }
-    
-    const rst = bfs(destination, n+1, adjL)
+    // console.log(adjM)
     
     for (const source of sources) {
-        answer.push(rst[source])
+        const rst = bfs(source, destination, n+1, adjM)
+        answer.push(rst)
     }
     
     return answer;
