@@ -10,7 +10,7 @@ function solution(scores) {
         const [s1, s2] = scores[i]
         
         if (s2 < maxB) {
-            // maxB를 가진 직원이 현재 직원보다 두가지 점수 모두 높다는 뜻이니까, 인센 못받는 직원임. 
+            // maxB를 가진 직원은 현재 직원보다 두가지 점수 모두 높다는 뜻이니까, 현재 직원은 인센 못받는 직원임. 
             // 만약 그게 원호면 종료.
             if (s1===w1 && s2===w2) return -1
         } else {
