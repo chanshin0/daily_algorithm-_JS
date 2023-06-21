@@ -1,6 +1,4 @@
 function solution(operations) {
-    var answer = [];
-    
     const que = []
     for (const op of operations) {
         const [m, n] = op.split(' ')
