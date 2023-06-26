@@ -6,17 +6,17 @@ function solution(cards) {
     const uf = (n) => {
         n--;
 
-        if (union[n]) return [];
+        if (union[n]) return 0;
         union[n] = 1;
 
-        return [cards[n], ...uf(cards[n])];
+        return 1 + uf(cards[n])
     }
     
     cards.forEach((ele, idx)=>{
         if (!union[idx]) {
             const len = uf(ele)
             // console.log(len)
-            answer.push(len.length)
+            answer.push(len)
         }
     })
     
