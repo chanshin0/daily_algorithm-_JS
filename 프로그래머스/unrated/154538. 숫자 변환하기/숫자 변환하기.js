@@ -1,29 +1,32 @@
 function solution(x, y, n) {
-    const delta = {
-        0: (a)=>a-n,
-        1: (a)=>a/2,
-        2: (a)=>a/3
+    let obj = {
+      0 : (z) => z+n,
+      1 : (z) => z*2,
+      2 : (z) => z*3
     }
 
-    const visited = Array(y+1).fill(0)
-    
-    const que = [[y,0]]
-    visited[y] = 1
-    
-    while (que.length > 0) {
-        const [now, cnt] = que.shift()
-        
-        if (now===x) return cnt
-        
-        for (const d in delta) {
-            const next = delta[d](now)
-            
-            if (0<=next && next === Math.floor(next) && !visited[next]) {
-                visited[next] = 1
-                que.push([next, cnt+1])
-            }
-        }
+    let queueIdx = 0
+    let queue = [{x: x, times : 0}]
+    let result = -1
+    let used = {}
+
+    while (queue.length > queueIdx) {
+      let { x, times } = queue[queueIdx]
+
+      if(x === y) {
+        result = times
+        return result
+      } else if (x > y || used[x]) {
+        queueIdx ++
+        continue
+      } else {
+        used[x] = true
+        Object.values(obj).forEach((func) => {
+          queue.push({ x: func(x), times: times + 1 })
+        })
+      }
+      queueIdx ++
     }
-    
-    return -1;
+
+  return result
 }
