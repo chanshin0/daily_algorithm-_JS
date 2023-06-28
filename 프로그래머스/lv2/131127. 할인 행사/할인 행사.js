@@ -7,7 +7,6 @@ function solution(want, number, discount) {
         obj[w] = n
     }
 
-    
     for (let j=0; j<discount.length-9; j++) {
         let item = discount[j]
         if (!obj[item]) continue
@@ -33,8 +32,6 @@ function solution(want, number, discount) {
             }
             if (newFlag) answer ++
         }
-        
-        
     } 
     
     return answer;
