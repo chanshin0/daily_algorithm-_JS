@@ -4,10 +4,10 @@ function solution(n, works) {
     const l = works.length
     
     works.sort((a,b)=>b-a)
+    let maxV = works[0]
+    if (maxV === 0) return 0
+    
     while (n > 0) {
-
-        let maxV = works[0]
-        if (maxV === 0) return 0
         for(let i=0; i<l; i++) {
             if (works[i] === maxV) {
                 works[i]--
