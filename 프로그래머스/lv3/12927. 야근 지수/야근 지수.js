@@ -1,16 +1,29 @@
 function solution(n, works) {
-    const sorted_works = [...works].sort((a, b) => b - a)
-    let max_work = sorted_works[0]
-    while(n > 0) {
-        for (let i = 0; i < sorted_works.length; i++) {
-            if (max_work === sorted_works[i]) {
-                sorted_works[i] -= sorted_works[i] > 0 ? 1 : 0
+    var answer = 0;
+    
+    const l = works.length
+    
+    works.sort((a,b)=>b-a)
+    while (n > 0) {
+
+        let maxV = works[0]
+        if (maxV === 0) return 0
+        for(let i=0; i<l; i++) {
+            if (works[i] === maxV) {
+                works[i]--
                 n--
+                if (!n) break
             }
-            if (!n) break
         }
-        max_work--
-        if (!max_work) break
+        
+        maxV --
+        if (!maxV) break
+
     }
-    return sorted_works.reduce((acc, curr) => acc + Math.pow(curr, 2), 0)
+    
+    for (const work of works) {
+        answer += work**2
+    }
+    
+    return answer;
 }
