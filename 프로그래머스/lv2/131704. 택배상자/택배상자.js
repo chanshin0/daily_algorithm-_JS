@@ -1,4 +1,6 @@
 function solution(order) {
+    // order.reverse()
+    
     var answer = 0;
     const l = order.length
     
