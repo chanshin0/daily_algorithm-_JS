@@ -1,7 +1,7 @@
 function solution(s, skip, index) {
     var answer = '';
     
-    const alphabet = 'abcdefghijklmnopqrstuvwxyz'.split('')
+    const alphabet = 'abcdefghijklmnopqrstuvwxyz'
     const l = alphabet.length
     const exclude = skip.split('')
     
