@@ -4,22 +4,21 @@ function solution(jobs) {
     let answer = 0;
     const l = jobs.length;
 
-    const pq = [];
+    const stack = [];
     let time = 0;
-    let i = 0;
-    while (i < jobs.length || pq.length > 0) {
-        if (i < jobs.length && jobs[i][0] <= time) {
-            pq.push(jobs[i++]);
-            pq.sort((a, b) => a[1] - b[1]);
-            continue;
-        }
-
-        if (pq.length === 0) {
-            time = jobs[i][0];
+    while (jobs.length > 0 || stack.length > 0) {
+        if (jobs.length > 0 && jobs[0][0] <= time) {
+            const [s, e] = jobs.shift();
+            stack.push([s, e]);
+            stack.sort((a, b) => b[1] - a[1]);
+        } else if (stack.length > 0) {
+            const [ns, ne] = stack.pop();
+            answer += ne + (time - ns);
+            time += ne;
         } else {
-            const [start, work] = pq.shift();
-            answer += time + work - start;
-            time += work;
+            const [s, e] = jobs.shift();
+            stack.push([s, e]);
+            time = s;
         }
     }
 
