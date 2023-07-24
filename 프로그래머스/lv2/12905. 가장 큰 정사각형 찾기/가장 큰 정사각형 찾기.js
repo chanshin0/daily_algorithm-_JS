@@ -2,6 +2,8 @@ function solution(board) {
     let answer = 0
     const [row, col] = [board.length, board[0].length]
     
+    if (row < 2) return 1
+    
     const dp = Array.from({length:row}, (_, r)=> 
         Array.from({length:col}, (_, c)=> board[r][c] ? 1 : 0))
     
@@ -14,13 +16,6 @@ function solution(board) {
                 answer = Math.max(answer, dp[i][j])
             }
         }
-    }
-    
-    if (row === 1) {
-        if (board[0].every(v=>v===0)) {
-            return 0
-        }
-        return 1
     }
     
     return answer**2
