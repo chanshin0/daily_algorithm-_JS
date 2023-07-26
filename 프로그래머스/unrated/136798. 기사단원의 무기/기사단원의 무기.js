@@ -5,7 +5,6 @@ function solution(number, limit, power) {
     for (let i=1; i<=number; i++) {
         const w = find(i)
         answer += w
-        console.log(w)
     }
     
     function find (n) {
