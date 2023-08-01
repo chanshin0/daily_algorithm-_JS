@@ -15,9 +15,7 @@ function solution(ingredient) {
         
         const check = stack.slice(stack.length-3).join('')
         if (check === '빵야채고기') {
-            stack.pop()
-            stack.pop()
-            stack.pop()
+            stack.length -= 3
             answer ++
         } else {
             stack.push(arr[v])
@@ -26,9 +24,3 @@ function solution(ingredient) {
     
     return answer;
 }
-
-
-// 1. 빵일떄,
-// 버거체크
-// 버거면 i--
-// 버거 아니면 i++
