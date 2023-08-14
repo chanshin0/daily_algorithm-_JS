@@ -1,25 +1,32 @@
 function solution(dirs) {
-    var answer = 0;
-    
-    const delta = {
-        U : [1,0],
-        D : [-1,0],
-        R : [0,1],
-        L : [0,-1]
-    }
-    
-    const set = new Set()
-    
-    let [i, j] = [0, 0]
-    dirs.split('').forEach(v=>{
-        const [di, dj] = delta[v]
-        const [ni, nj] = [i+di, j+dj]
-        if (Math.abs(ni) <= 5 && Math.abs(nj) <= 5) {
-            set.add([i,j,ni,nj].join(''))
-            set.add([ni,nj,i,j].join(''))
-            i = ni; j = nj
+    const firstPathMap = new Map();
+    let now = [0, 0];
+    let moved;
+    for(let dir of dirs) {
+        moved = move(now, dir);
+        if(moved[0] < -5 || moved[0] > 5 || moved[1] < -5 || moved[1] > 5) {
+            continue;
         }
-    })
-    
-    return set.size/2;
+        firstPathMap.set(generateKey(now, moved), true);
+        now = moved;
+    }  
+
+    return firstPathMap.size;
+}
+
+function move(now, dir) {
+    switch(dir) {
+        case 'L': 
+            return [now[0] - 1, now[1]];
+        case 'R':
+            return [now[0] + 1, now[1]];
+        case 'U':
+            return [now[0], now[1] + 1];
+        case 'D':
+            return [now[0], now[1] - 1];
+    }        
+}
+
+function generateKey(now, moved) {
+    return `${Math.min(now[0], moved[0])},${Math.max(now[0], moved[0])},${Math.min(now[1], moved[1])},${Math.max(now[1], moved[1])}`;
 }
