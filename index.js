@@ -1,37 +1,31 @@
 const filePath = process.platform === "linux" ? "/dev/stdin" : "./testcase.txt";
-let input = require('fs').readFileSync(filePath).toString().replace(/\r/g, '').split('\n')
-// console.log(input)
+let input = require("fs")
+  .readFileSync(filePath)
+  .toString()
+  .replace(/\r/g, "")
+  .split("\n");
+// console.log(input);
 
-const [n, m] = input.shift().split(' ').map(Number)
-const area = Array.from({length:n}, ()=>input.shift().split(' ').map(Number))
+const [N, M] = input[0].split(" ").map(Number);
+// console.log(N, M);
 
-const visited = Array.from({length:n}, ()=>Array.from({length:m}, ()=>0))
-const delta = [[0,1],[1,0],[0,-1],[-1,0]]
+const seq = [];
+let results = "";
+const visited = Array.from({ length: M + 1 }, () => false);
+dfs(0);
+console.log(results);
 
-let paint = 0
-let maxV = 0
-area.forEach((row, i)=>{
-  row.forEach((col, j)=>{
-    if (col === 1 && !visited[i][j]) {
-      paint ++
-      maxV = Math.max(maxV, dfs(i, j))
-    }
-  })
-})
-
-console.log(paint)
-console.log(maxV)
-
-function dfs(i, j) {
-  visited[i][j] = 1
-
-  let cnt = 1
-  for (const [di, dj] of delta) {
-    const [ni, nj] = [i+di, j+dj]
-    if (area[ni] !== undefined && area[ni][nj] === 1 && !visited[ni][nj]) {
-      cnt += dfs(ni, nj)
-    } 
+function dfs(depth) {
+  if (depth === M) {
+    return (results += seq.join(" ") + "\n");
   }
 
-  return cnt
+  for (let i = 1; i <= N; i++) {
+    if (visited[i]) continue;
+    visited[i] = true;
+    seq.push(i);
+    dfs(depth + 1);
+    seq.pop();
+    visited[i] = false;
+  }
 }
