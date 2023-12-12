@@ -7,25 +7,24 @@ let input = require("fs")
 // console.log(input);
 
 const [N, M] = input[0].split(" ").map(Number);
-// console.log(N, M);
+let answer = ''
 
-const seq = [];
-let results = "";
-const visited = Array.from({ length: M + 1 }, () => false);
-dfs(0);
-console.log(results);
+const used = Array.from({length:N+1}, ()=>0)
 
-function dfs(depth) {
-  if (depth === M) {
-    return (results += seq.join(" ") + "\n");
+function makeSequence(seq=[]) {
+  if (seq.length === M) {
+    answer += seq.join(' ') + '\n'
+    return
   }
 
-  for (let i = 1; i <= N; i++) {
-    if (visited[i]) continue;
-    visited[i] = true;
-    seq.push(i);
-    dfs(depth + 1);
-    seq.pop();
-    visited[i] = false;
+  for (let i=1; i<=N; i++) {
+    if (used[i]) continue
+    if (seq.length && seq.at(-1) > i) continue
+    used[i] = 1
+    makeSequence([...seq, i])
+    used[i] = 0
   }
 }
+
+makeSequence()
+console.log(answer)
