@@ -4,27 +4,22 @@ let input = require("fs")
   .toString()
   .replace(/\r/g, "")
   .split("\n");
-// console.log(input);
 
-const [N, M] = input[0].split(" ").map(Number);
-let answer = ''
+const N = +input.shift()  
+input = input.map(v=>v.split(' ').map(Number)).sort((a,b)=>a[0]-b[0])
 
-const used = Array.from({length:N+1}, ()=>0)
+const maxH = [...input].sort((a,b)=>b[1]-a[1])[0][1]
 
-function makeSequence(seq=[]) {
-  if (seq.length === M) {
-    answer += seq.join(' ') + '\n'
-    return
-  }
+console.log(input, maxH);
 
-  for (let i=1; i<=N; i++) {
-    if (used[i]) continue
-    if (seq.length && seq.at(-1) > i) continue
-    used[i] = 1
-    makeSequence([...seq, i])
-    used[i] = 0
-  }
+const [s, e] = [input[0][0], input.at(-1)[0]]
+
+for (let i=s; i<=e; i++) {
+  
 }
 
-makeSequence()
-console.log(answer)
+// 왼쪽에서 출발, 
+// 자기보다 높이가 높거나 같은 막대 만나면 이동한 면적++, 다시 출발
+// 오른쪽 끝에 도달하면 자기 막대영역만 ++, 인덱스 기록 후 종료
+// 오른쪽에서 출발, 저장한 인덱스에 도달할 때까지 이동.
+
