@@ -5,27 +5,43 @@ let input = require("fs")
   .replace(/\r/g, "")
   .split("\n");
 
-const N = +input.shift();
-input = input.map((v) => v.split(" ").map(Number));
+input = input.map(Number);
 // console.log(input);
+// const N = +input.shift();
+// input = input.map((v) => v.split(" ").map(Number));
+// console.log(N, input);
 
-const arr = Array(N).fill(0);
-
-for (let i = 1; i < N; i++) {
-  arr[i] = arr[i - 1] + getDistance(input[i - 1], input[i]);
-}
-// console.log(arr);
-
-let answer = Infinity;
-for (let i = 1; i < N - 1; i++) {
-  const left = arr[i - 1];
-  const right = arr[N - 1] - arr[i + 1];
-  const d = left + getDistance(input[i - 1], input[i + 1]) + right;
-  answer = Math.min(answer, d);
+const arr = [0];
+let i = 1;
+while (arr.length < 1000000) {
+  if (!isRepeated(i)) {
+    arr.push(i);
+  }
+  i++;
 }
 
-console.log(answer);
+const answer = [];
+while (true) {
+  const t = input.shift();
+  if (t === 0) break;
+  answer.push(arr[t]);
+}
 
-function getDistance([si, sj], [ei, ej]) {
-  return Math.abs(si - ei) + Math.abs(sj - ej);
+console.log(answer.join("\n"));
+
+function isRepeated(n) {
+  if (n <= 10) return false;
+
+  const set = new Set();
+  const copy = n.toString().split("");
+
+  for (let i = 0; i < copy.length; i++) {
+    if (set.has(copy[i])) {
+      return true;
+    } else {
+      set.add(copy[i]);
+    }
+  }
+
+  return false;
 }
