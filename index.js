@@ -5,43 +5,13 @@ let input = require("fs")
   .replace(/\r/g, "")
   .split("\n");
 
-input = input.map(Number);
-// console.log(input);
-// const N = +input.shift();
-// input = input.map((v) => v.split(" ").map(Number));
-// console.log(N, input);
+const arr = input.map(Number).sort((a, b) => a - b);
+console.log(arr);
 
-const arr = [0];
-let i = 1;
-while (arr.length < 1000000) {
-  if (!isRepeated(i)) {
-    arr.push(i);
-  }
-  i++;
-}
+let [s, e] = [0, 6];
+let sum = 0;
 
 const answer = [];
-while (true) {
-  const t = input.shift();
-  if (t === 0) break;
-  answer.push(arr[t]);
-}
+for (let i = 0; i < 3; i++) {
 
-console.log(answer.join("\n"));
-
-function isRepeated(n) {
-  if (n <= 10) return false;
-
-  const set = new Set();
-  const copy = n.toString().split("");
-
-  for (let i = 0; i < copy.length; i++) {
-    if (set.has(copy[i])) {
-      return true;
-    } else {
-      set.add(copy[i]);
-    }
-  }
-
-  return false;
 }
