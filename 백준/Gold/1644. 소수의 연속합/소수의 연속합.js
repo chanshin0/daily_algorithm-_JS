@@ -32,13 +32,10 @@ arr.forEach((v, i) => {
 
 let answer = decimals.includes(n) ? 1 : 0;
 let [s, e] = [0, 1];
-let sum = decimals[0] + +decimals[1];
+let sum = decimals[0] + decimals[1];
 while (s < e && e < decimals.length) {
   // console.log(s, e, sum);
   if (sum > n) {
-    if (e - s === 1) {
-      break;
-    }
     sum -= decimals[s++];
   } else if (sum < n) {
     sum += decimals[++e];
