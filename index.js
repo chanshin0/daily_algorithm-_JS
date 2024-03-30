@@ -7,3 +7,11 @@ let input = require("fs")
   .split("\n");
 
 console.log(input);
+
+const n = +input.shift();
+const obj = {};
+input.forEach((v) => {
+  const [a, b] = v.split(" ").map(Number);
+  obj[a] = b;
+});
+console.log(obj);
